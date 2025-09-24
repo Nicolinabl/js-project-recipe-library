@@ -48,6 +48,22 @@ body {
   border: 2px solid #0018a4;
 }
 
+.filterButtons.italianSelected {
+  background-color: #0018A4;
+  color: white;
+}
+
+.filterButtons.asianSelected {
+  background-color: #0018A4;
+  color: white;
+}
+
+.filterButtons.mexicanSelected {
+  background-color: #0018A4;
+  color: white;
+}
+
+
 .sort {
   height: 40px;
   border-radius: 50px;
@@ -88,7 +104,7 @@ body {
   }
 }
 
-.recipe {
+article {
   display: flex;
   flex-direction: column;
   width: 300px;

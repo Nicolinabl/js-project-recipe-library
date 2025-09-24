@@ -19,16 +19,31 @@
   <h1 class="mainHeading">Recipe Library</h1>
 
   <!---FILTERS-->
-  <!--Style buttons, give ids, create javascript that can click and unclick filters. When clicked, list comes up that shows options-->
+  <!-- give ids, create javascript that can click and unclick filters.-->
   <section class="filters-sorting">
     <section class="filterKitchen">
       <h2>Filter on cuisine</h2>
       <div class="filters">
-        <button class="filterButtons">Italian</button>
-        <button class="filterButtons">Asian</button>
-        <button class="filterButtons">Mexican</button>
-        <button class="filterButtons">Middle eastern</button>
-      </div>
+        <input
+          type="button"
+          value="Italian"
+          id="italianFilter"
+          class="filterButtons"
+        >
+
+        <input
+          type="button"
+          value="Asian"
+          id="asianFilter"
+          class="filterButtons"
+        >
+
+        <input
+          type="button"
+          value="Mexican"
+          id="mexicanFilter"
+          class="filterButtons"
+        >
     </section>
 
     <section class="sortTime">
@@ -43,27 +58,9 @@
   <main class="recipeSection">
 
     <!--CARD 1-->
-    <article class="recipe One">
-      <div class="topImage">
-        <img
-          src="images/food.jpg"
-          alt="photo of food"
-        >
-        <div class="recipeHeading">
-          <h2>Cheat's cheesy Focaccia</h2>
-        </div>
-      </div>
-      <div class="generalInfo">
-        <p><b>Cuisine: </b>Italian</p>
-        <p><b>Time: </b>40 minutes</p>
-      </div>
-      <div class="ingredients">
-        <h3>Ingredients</h3>
-        <p>500 g bred</p>
-        <p>2 tbs oliveoil</p>
-        <p>25 g parmesan</p>
-        <p>75 g dolcelatte cheese</p>
-      </div>
+    <article>
+      <h3>Selections</h3>
+      <p id="selections"></p>
     </article>
 
     <article class="recipe Two">
