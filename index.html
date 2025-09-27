@@ -21,28 +21,32 @@
   <!---FILTERS-->
   <!-- give ids, create javascript that can click and unclick filters.-->
   <section class="filters-sorting">
-    <section class="filterKitchen">
+
+    <section
+      id="cuisineSection"
+      class="cuisineFilters"
+    >
       <h2>Filter on cuisine</h2>
       <div class="filters">
         <input
           type="button"
           value="Italian"
           id="italianFilter"
-          class="filterButtons"
+          class="filterButton"
         >
 
         <input
           type="button"
           value="Asian"
           id="asianFilter"
-          class="filterButtons"
+          class="filterButton"
         >
 
         <input
           type="button"
           value="Mexican"
           id="mexicanFilter"
-          class="filterButtons"
+          class="filterButton"
         >
     </section>
 
@@ -60,7 +64,9 @@
     <!--CARD 1-->
     <article>
       <h3>Selections</h3>
-      <p id="selections"></p>
+      <p id="selections1"></p>
+      <p id="selections2"></p>
+      <p id="selections3"></p>
     </article>
 
     <article class="recipe Two">

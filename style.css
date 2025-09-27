@@ -33,7 +33,7 @@ body {
   gap: 10px;
 }
 
-.filterButtons {
+.filterButton {
   border: none;
   height: 40px;
   border-radius: 50px;
@@ -44,24 +44,33 @@ body {
   font-weight: 350;
 }
 
-.filterButtons:hover {
+.filterButton.active {
+  background-color: #0018A4;
+  color: white;
+}
+
+.filterButton:hover {
   border: 2px solid #0018a4;
 }
 
-.filterButtons.italianSelected {
+/*
+attempt 1
+.filterButton.italianSelected {
   background-color: #0018A4;
   color: white;
 }
 
-.filterButtons.asianSelected {
+.filterButton.asianSelected {
   background-color: #0018A4;
   color: white;
 }
 
-.filterButtons.mexicanSelected {
+.filterButton.mexicanSelected {
   background-color: #0018A4;
   color: white;
-}
+}*/
+
+
 
 
 .sort {
@@ -136,16 +145,6 @@ h2 {
   font-size: 22px;
   font-weight: 700;
 }
-
-/*li {
-  list-style-type: none;
-  font-size: 16px;
-}
-
-ul {
-  padding: 0;
-  margin 0;
-}*/
 
 .generalInfo {
   width: 268px;
