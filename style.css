@@ -30,6 +30,7 @@ body {
 }
 
 .filters {
+  display: flex;
   gap: 10px;
 }
 
@@ -42,6 +43,7 @@ body {
   font-size: 18px;
   color: #0018A4;
   font-weight: 350;
+  gap: 10px;
 }
 
 .filterButton.active {
@@ -50,7 +52,8 @@ body {
 }
 
 .filterButton:hover {
-  border: 2px solid #0018a4;
+  box-shadow: 0 0 0 2px #0018a4;
+  /* "fake" border. To prevent other elements shifting on the page when added*/
 }
 
 /*
@@ -71,12 +74,15 @@ attempt 1
 }*/
 
 
+.sortings {
+  display: flex;
+  gap: 10px;
+}
 
-
-.sort {
+.sortButton {
   height: 40px;
   border-radius: 50px;
-  padding: 8px 16px 8px 16px;
+  padding: 8px 16px;
   gap: 10px;
   background-color: #ffecea;
   color: #0018a4;
@@ -85,8 +91,13 @@ attempt 1
   font-weight: 350;
 }
 
-.sort:hover {
-  border: 2px solid #0018a4;
+.sortButton:hover {
+  box-shadow: 0 0 0 2px #0018a4;
+}
+
+.sortButton.active {
+  background-color: #0018A4;
+  color: white;
 }
 
 .recipeSection {
@@ -98,6 +109,11 @@ attempt 1
 
 @media (max-width: 440px) {
   .recipeSection {
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .articles {
     margin: 0 auto;
     justify-content: center;
   }
@@ -120,11 +136,10 @@ article {
   padding: 16px 16px 24px 16px;
   border-radius: 16px;
   background-color: #FFFFFF;
-  gap: 16px;
   border: 1px solid #E9E9E9;
 }
 
-.recipe:hover {
+article:hover {
   border: 2px solid #0018a4;
   box-shadow: 0px 0px 30px 0px #0018A433;
 
@@ -136,7 +151,7 @@ img {
   border-radius: 12px;
 }
 
-.recipeHeading {
+.recipeHeadingSection {
   width: 268px;
   border-bottom: 1px solid #E9E9E9;
 }
@@ -146,15 +161,32 @@ h2 {
   font-weight: 700;
 }
 
+span {
+  font-weight: bold;
+}
+
 .generalInfo {
   width: 268px;
-  gap: 8px;
+  /* gap: 8px; */
   padding: 8px 0;
   border-bottom: 1px solid #E9E9E9;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 p {
   margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+li {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 500;
 }
 
 

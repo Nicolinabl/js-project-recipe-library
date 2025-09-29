@@ -19,7 +19,6 @@
   <h1 class="mainHeading">Recipe Library</h1>
 
   <!---FILTERS-->
-  <!-- give ids, create javascript that can click and unclick filters.-->
   <section class="filters-sorting">
 
     <section
@@ -50,48 +49,80 @@
         >
     </section>
 
+    <!---SORTING OPTIONS-->
     <section class="sortTime">
-      <h2>Sorting options</h2>
-      <button class="sort">Cooking time</button>
-      <button class="sort">Popularity</button>
-      <button class="sort">Amount of ingredients</button>
+
+      <h2>Sort on time</h2>
+      <div class="sortings">
+        <button
+          id="sortAscending"
+          class="sortButton"
+        >Ascending</button>
+        <button
+          id="sortDescending"
+          class="sortButton"
+        >Descending</button>
+      </div>
     </section>
   </section>
 
   <!--RECIPE CARDS-->
   <main class="recipeSection">
 
-    <!--CARD 1-->
     <article>
-      <h3>Selections</h3>
-      <p id="selections1"></p>
-      <p id="selections2"></p>
-      <p id="selections3"></p>
+      <h3>Selections PLACEHOLDER</h3>
+      <p id="selections"></p>
+      <p id="cookingTime"></p>
     </article>
 
-    <article class="recipe Two">
-      <div class="topImage">
+    <!-- currently not in use. Placeholder for js function "test 2"
+    <article
+      id="recipeContainer"
+      class="recipe"
+    > 
+    </article>-->
+
+    <!-- <article
+      id="recipeContainer"
+      class="recipe"
+    >
+      <div
+        id="recipeImageContainer"
+        class="topImageContainer"
+      >
         <img
+          id="recipeImage"
+          class="topImage"
           src="images/food.jpg"
           alt="photo of food"
         >
-        <div class="recipeHeading">
-          <h2>Burnt-scallion Fish</h2>
+        <div
+          id="recipeHeadingContainer"
+          class="recipeHeadingSection"
+        >
+          <h2
+            id="recipeTitle"
+            class="recipeHeading"
+          >Test</h2>
         </div>
       </div>
       <div class="generalInfo">
-        <p><b>Cuisine: </b>Italian</p>
-        <p><b>Time: </b>40 minutes</p>
+        <ul>
+          <li class="cuisine"><b>Cuisine: </b>Italian</li>
+          <li class="readyIn"><b>Time: </b>40 minutes</li>
+        </ul>
       </div>
       <div class="ingredients">
         <h3>Ingredients</h3>
-        <p>2 bunches scallions</p>
-        <p>8 tbs butter</p>
-        <p>2 oz fish filets</p>
+        <ul>
+          <li>2 bunches scallions</li>
+          <li>8 tbs butter</li>
+          <li>2 oz fish filets</li>
+        </ul>
       </div>
-    </article>
+    </article> -->
 
-    <article class="recipe Three">
+    <!-- <article class="recipe two">
       <div class="topImage">
         <img
           src="images/food.jpg"
@@ -114,7 +145,7 @@
       </div>
     </article>
 
-    <article class="recipe Four">
+    <article class="recipe three">
       <div class="topImage">
         <img
           src="images/food.jpg"
@@ -133,7 +164,7 @@
         <p>8 small fish</p>
         <p>4 cups vegetable oils</p>
       </div>
-    </article>
+    </article> -->
   </main>
 
   <script src="script.js"></script>

@@ -1,4 +1,327 @@
-// --------------------ATTEMPT 1----------------------
+
+const recipes = [
+  {
+    id: 1,
+    title: "Vegan Lentil Soup",
+    image: "./chicken.webp",
+    readyInMinutes: 30,
+    servings: 4,
+    sourceUrl: "https://example.com/vegan-lentil-soup",
+    diets: ["vegan"],
+    cuisine: "Mediterranean",
+    ingredients: [
+      "red lentils",
+      "carrots",
+      "onion",
+      "garlic",
+      "tomato paste",
+      "cumin",
+      "paprika",
+      "vegetable broth",
+      "olive oil",
+      "salt"
+    ],
+    pricePerServing: 2.5,
+    popularity: 85
+  },
+  {
+    id: 2,
+    title: "Vegetarian Pesto Pasta",
+    image: "./chicken.webp",
+    readyInMinutes: 25,
+    servings: 2,
+    sourceUrl: "https://example.com/vegetarian-pesto-pasta",
+    diets: ["vegetarian"],
+    cuisine: "Italian",
+    ingredients: [
+      "pasta",
+      "basil",
+      "parmesan cheese",
+      "garlic",
+      "pine nuts",
+      "olive oil",
+      "salt",
+      "black pepper"
+    ],
+    pricePerServing: 3.0,
+    popularity: 92
+  },
+  {
+    id: 3,
+    title: "Gluten-Free Chicken Stir-Fry",
+    image: "./chicken.webp",
+    readyInMinutes: 20,
+    servings: 3,
+    sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
+    diets: ["gluten-free"],
+    cuisine: "Asian",
+    ingredients: [
+      "chicken breast",
+      "broccoli",
+      "bell pepper",
+      "carrot",
+      "soy sauce (gluten-free)",
+      "ginger",
+      "garlic",
+      "sesame oil",
+      "cornstarch",
+      "green onion",
+      "sesame seeds",
+      "rice"
+    ],
+    pricePerServing: 4.0,
+    popularity: 78
+  },
+  {
+    id: 4,
+    title: "Dairy-Free Tacos",
+    image: "./chicken.webp",
+    readyInMinutes: 15,
+    servings: 2,
+    sourceUrl: "https://example.com/dairy-free-tacos",
+    diets: ["dairy-free"],
+    cuisine: "Mexican",
+    ingredients: [
+      "corn tortillas",
+      "ground beef",
+      "taco seasoning",
+      "lettuce",
+      "tomato",
+      "avocado"
+    ],
+    pricePerServing: 2.8,
+    popularity: 88
+  },
+  {
+    id: 5,
+    title: "Middle Eastern Hummus",
+    image: "./chicken.webp",
+    readyInMinutes: 10,
+    servings: 4,
+    sourceUrl: "https://example.com/middle-eastern-hummus",
+    diets: ["vegan", "gluten-free"],
+    cuisine: "Middle Eastern",
+    ingredients: [
+      "chickpeas",
+      "tahini",
+      "garlic",
+      "lemon juice",
+      "olive oil"
+    ],
+    pricePerServing: 1.5,
+    popularity: 95
+  },
+  {
+    id: 6,
+    title: "Quick Avocado Toast",
+    image: "./chicken.webp",
+    readyInMinutes: 5,
+    servings: 1,
+    sourceUrl: "https://example.com/quick-avocado-toast",
+    diets: ["vegan"],
+    cuisine: "Mediterranean",
+    ingredients: [
+      "bread",
+      "avocado",
+      "lemon juice",
+      "salt"
+    ],
+    pricePerServing: 2.0,
+    popularity: 90
+  },
+  {
+    id: 7,
+    title: "Beef Stew",
+    image: "./chicken.webp",
+    readyInMinutes: 90,
+    servings: 5,
+    sourceUrl: "https://example.com/beef-stew",
+    diets: [],
+    cuisine: "European",
+    ingredients: [
+      "beef chunks",
+      "potatoes",
+      "carrots",
+      "onion",
+      "garlic",
+      "tomato paste",
+      "beef broth",
+      "red wine",
+      "bay leaves",
+      "thyme",
+      "salt",
+      "black pepper",
+      "butter",
+      "flour",
+      "celery",
+      "mushrooms"
+    ],
+    pricePerServing: 5.5,
+    popularity: 80
+  }
+]
+
+// Function: selected filterbuttons
+const selections = document.getElementById("selections")
+const filterButton = document.querySelectorAll(".filterButton")
+
+const selectedFilter = () => {
+  filterButton.forEach(button => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("active")
+      if (button.id === "italianFilter" && button.classList.contains("active")) {
+        selections.innerText = ("🍝")
+      } else if (button.id === "italianFilter" && !button.classList.contains("active")) {
+        selections.innerText = ""
+      } else if (button.id === "asianFilter" && button.classList.contains("active")) {
+        selections.innerText = "🍱"
+      } else if (button.id === "asianFilter" && !button.classList.contains("active")) {
+        selections.innerText = ""
+      } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
+        selections.innerText = "🌮"
+      } else if (button.id === "mexicanFilter" && !button.classList.contains("active")) {
+        selections.innerText = ""
+      }
+    })
+  })
+}
+
+selectedFilter()
+
+// Function: selected sorting options
+const cookingTime = document.getElementById("cookingTime")
+const sortingButton = document.querySelectorAll(".sortButton")
+
+const selectedSorting = () => {
+  sortingButton.forEach(button => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("active")
+      if (button.id === "sortAscending" && button.classList.contains("active")) {
+        cookingTime.innerText = ("Ascending it is")
+      } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
+        cookingTime.innerText = ""
+      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
+        cookingTime.innerText = "Descending it is"
+      } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
+        cookingTime.innerText = ""
+      }
+    })
+  })
+}
+
+selectedSorting()
+
+
+//  function that creates cards for every recipe object in the array
+const recipeSection = document.querySelector(".recipeSection")
+
+const displayedRecipes = (recipes) => {
+  recipes.forEach(recipe => {
+    recipeSection.innerHTML += `
+    <article class="recipe">
+      <div class="topImageContainer">
+        <img class="topImage" src="images/food.jpg" alt="photo of food">
+        <div class="recipeHeadingSection">
+          <h2 class="recipeHeading">${recipe.title}</h2>
+        </div>
+      </div>
+      <div class="generalInfo">
+        <ul>
+          <li class="cuisine"><span>Cuisine:</span> ${recipe.cuisine}</li>
+          <li class="readyIn"><span>Time:</span> ${recipe.readyInMinutes}</li>
+        </ul>
+      </div>
+      <div class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+          ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
+        </ul>
+      </div>
+    </article>
+    `
+  })
+}
+
+displayedRecipes(recipes)
+
+// Use filter() to only display the recipes that are chosen. If italian button is active -> display italian cuisine. SO: show only the recipes containing cuisine: "Italian"
+
+
+
+
+
+// Alternative and test functions not in use below
+
+
+// ------------------------------------------------------------
+// "Test 2" function (for learning) to link recipe object to website
+
+// const recipeContainer = document.getElementById("recipeContainer")
+
+// recipes.forEach(recipe => {
+//   const article = document.createElement("article")
+//   article.classList.add("recipe")
+
+//   article.innerHTML = `
+//     <div class="topImageContainer">
+//   <img class="topImage"
+//     src="images/food.jpg"
+//     alt="photo of food">
+//   <div class="recipeHeadingSection">
+//     <h2 class="recipeHeading">${recipe.title}</h2>
+//   </div>
+// </div>
+// <div class="generalInfo">
+//   <ul>
+//     <li class="cuisine">Cuisine: ${recipe.cuisine}</li>
+//     <li class="readyIn">Time: ${recipe.readyInMinutes}</li>
+//   </ul>
+// </div>
+// <div class="ingredients">
+//   <h3>Ingredients</h3>
+//   <ul>
+//     fix this
+//   </ul>
+// </div>
+//   `
+//   recipeContainer.appendChild(article)
+// })
+
+
+// ------------------------------------------------------------
+// FUNCTION for filterbuttons split in 2 parts
+
+// const selectedFilter = () => { 
+//   filterButton.forEach(button => {
+//   button.addEventListener("click", () => {
+//     button.classList.toggle("active")
+//     chosenFilters(button)
+//     // chosenFilter function called in here to let it access button
+//   })
+// })
+// }
+
+// selectedFilter()
+
+// const chosenFilters = (button) => {
+//   if (button.id === "italianFilter" && button.classList.contains("active")) {
+//     selections1.innerText = ("🍝")
+//   } else if (button.id === "italianFilter" && !button.classList.contains("active")) {
+//     selections1.innerText = ("")
+//   } else if (button.id === "asianFilter" && button.classList.contains("active")) {
+//     selections2.innerText = "🍱"
+//   } else if (button.id === "asianFilter" && !button.classList.contains("active")) {
+//     selections2.innerText = ""
+//   } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
+//     selections3.innerText = "🌮"
+//   } else if (button.id === "mexicanFilter" && !button.classList.contains("active")) {
+//     selections3.innerText = ""
+//   }
+// }
+
+
+// ------------------------------------------------------------
+// ATTEMPT 1 toggle filters
 // const italianFilter = document.getElementById("italianFilter")
 // const asianFilter = document.getElementById("asianFilter")
 // const mexicanFilter = document.getElementById("mexicanFilter")
@@ -35,66 +358,13 @@
 // }
 
 
-// ---------------------- ATTEMPT 2 --------------------
-const selections1 = document.getElementById("selections1")
-const selections2 = document.getElementById("selections2")
-const selections3 = document.getElementById("selections3")
-const filterButton = document.querySelectorAll(".filterButton")
-
-
-const selectedFilter = () => {
-  filterButton.forEach(button => {
-    button.addEventListener("click", () => {
-      button.classList.toggle("active")
-      if (button.id === "italianFilter" && button.classList.contains("active")) {
-        selections1.innerText = ("🍝")
-      } else if (button.id === "italianFilter" && !button.classList.contains("active")) {
-        selections1.innerText = ""
-      } else if (button.id === "asianFilter" && button.classList.contains("active")) {
-        selections2.innerText = "🍱"
-      } else if (button.id === "asianFilter" && !button.classList.contains("active")) {
-        selections2.innerText = ""
-      } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
-        selections3.innerText = "🌮"
-      } else if (button.id === "mexicanFilter" && !button.classList.contains("active")) {
-        selections3.innerText = ""
-      }
-    })
-  })
-}
-
-selectedFilter()
-
-
-
-// // ----------- ATTEMPT 3. same as 2 but in two parts --------------
-// const selectedFilter = () => { 
-//   filterButton.forEach(button => {
-//   button.addEventListener("click", () => {
-//     button.classList.toggle("active")
-//     chosenFilters(button)
-//     // chosenFilter function called in here to let it access button
-//   })
-// })
-// }
-
-// selectedFilter()
-
-// const chosenFilters = (button) => {
-//   if (button.id === "italianFilter" && button.classList.contains("active")) {
-//     selections1.innerText = ("🍝")
-//   } else if (button.id === "italianFilter" && !button.classList.contains("active")) {
-//     selections1.innerText = ("")
-//   } else if (button.id === "asianFilter" && button.classList.contains("active")) {
-//     selections2.innerText = "🍱"
-//   } else if (button.id === "asianFilter" && !button.classList.contains("active")) {
-//     selections2.innerText = ""
-//   } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
-//     selections3.innerText = "🌮"
-//   } else if (button.id === "mexicanFilter" && !button.classList.contains("active")) {
-//     selections3.innerText = ""
-//   }
-// }
-
-
-
+// ------------------------------------------------------------
+// PROBABLY DONT NEED THIS? links not in use
+// const recipeImageContainer = document.getElementById("recipeImageContainer")
+// const topImageContainer = document.querySelectorAll(".topImage")
+// const recipeImage = document.getElementById("recipeImage")
+// const topImage = document.querySelectorAll(".topImage")
+// const recipeHeadingContainer = document.getElementById("recipeHeadingContainer")
+// const recipeHeadingSection = document.querySelectorAll(".recipeHeadingSection")
+// const recipeTitle = document.getElementById("recipeTitle")
+// const recipeHeading = document.querySelectorAll(".recipeHeading")
