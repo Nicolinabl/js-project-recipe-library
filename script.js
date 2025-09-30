@@ -161,57 +161,6 @@ const recipes = [
   }
 ]
 
-// Function: selected filterbuttons
-const selections = document.getElementById("selections")
-const filterButton = document.querySelectorAll(".filterButton")
-
-const selectedFilter = () => {
-  filterButton.forEach(button => {
-    button.addEventListener("click", () => {
-      button.classList.toggle("active")
-      if (button.id === "italianFilter" && button.classList.contains("active")) {
-        selections.innerText = ("🍝")
-      } else if (button.id === "italianFilter" && !button.classList.contains("active")) {
-        selections.innerText = ""
-      } else if (button.id === "asianFilter" && button.classList.contains("active")) {
-        selections.innerText = "🍱"
-      } else if (button.id === "asianFilter" && !button.classList.contains("active")) {
-        selections.innerText = ""
-      } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
-        selections.innerText = "🌮"
-      } else if (button.id === "mexicanFilter" && !button.classList.contains("active")) {
-        selections.innerText = ""
-      }
-    })
-  })
-}
-
-selectedFilter()
-
-// Function: selected sorting options
-const cookingTime = document.getElementById("cookingTime")
-const sortingButton = document.querySelectorAll(".sortButton")
-
-const selectedSorting = () => {
-  sortingButton.forEach(button => {
-    button.addEventListener("click", () => {
-      button.classList.toggle("active")
-      if (button.id === "sortAscending" && button.classList.contains("active")) {
-        cookingTime.innerText = ("Ascending it is")
-      } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
-        cookingTime.innerText = ""
-      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
-        cookingTime.innerText = "Descending it is"
-      } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
-        cookingTime.innerText = ""
-      }
-    })
-  })
-}
-
-selectedSorting()
-
-
 //  function that creates cards for every recipe object in the array
 const recipeSection = document.querySelector(".recipeSection")
 
@@ -244,15 +193,110 @@ const displayedRecipes = (recipes) => {
 
 displayedRecipes(recipes)
 
-// Use filter() to only display the recipes that are chosen. If italian button is active -> display italian cuisine. SO: show only the recipes containing cuisine: "Italian"
+// Function: show selected filters
+const filterButton = document.querySelectorAll(".filterButton")
+
+// shorten these functions. IF possible, make into one?
+// Italian
+const italianFilterSelected = (recipe) => {
+  return recipe.cuisine === "Italian"
+}
+const italianRecipes = recipes.filter(italianFilterSelected)
+
+// Asian
+const asianRecipesSelected = (recipe) => {
+  return recipe.cuisine === "Asian"
+}
+const asianRecipes = recipes.filter(asianRecipesSelected)
+
+// mexican
+const mexicanRecipesSelected = (recipe) => {
+  return recipe.cuisine === "Mexican"
+}
+const mexicanRecipes = recipes.filter(mexicanRecipesSelected)
+
+const selectedFilter = () => {
+  filterButton.forEach(button => {
+    button.addEventListener("click", () => {
+      filterButton.forEach(btn => btn.classList.remove("active"))
+      button.classList.add("active")
+      // put back: button.classList.toggle("active"), when creating code that can select several filters?
+
+      if (button.id === "allFilters" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(recipes)
+      } else if (button.id === "italianFilter" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(italianRecipes)
+      } else if (button.id === "asianFilter" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(asianRecipes)
+      } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(mexicanRecipes)
+      } else {
+        recipeSection.innerHTML = ""
+        displayedRecipes(recipes)
+      }
+    })
+  })
+}
+
+selectedFilter()
+
+// Function: selected sorting options
+const cookingTime = document.getElementById("cookingTime")
+const sortingButton = document.querySelectorAll(".sortButton")
+
+
+const selectedSorting = () => {
+  sortingButton.forEach(button => {
+    button.addEventListener("click", () => {
+      sortingButton.forEach(btn => btn.classList.remove("active"))
+      button.classList.add("active")
+      if (button.id === "sortAscending" && button.classList.contains("active")) {
+        cookingTime.innerText = ("Ascending it is")
+      } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
+        cookingTime.innerText = ""
+      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
+        cookingTime.innerText = "Descending it is"
+      } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
+        cookingTime.innerText = ""
+      }
+    })
+  })
+}
+
+selectedSorting()
+
+// const cookingTime = document.getElementById("cookingTime")
+// const sortingButton = document.querySelectorAll(".sortButton")
+
+// const selectedSorting = () => {
+//   sortingButton.forEach(button => {
+//     button.addEventListener("click", () => {
+//       sortingButton.forEach(btn => btn.classList.remove("active"))
+//       button.classList.add("active")
+//       if (button.id === "sortAscending" && button.classList.contains("active")) {
+//         cookingTime.innerText = ("Ascending it is")
+//       } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
+//         cookingTime.innerText = ""
+//       } else if (button.id === "sortDescending" && button.classList.contains("active")) {
+//         cookingTime.innerText = "Descending it is"
+//       } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
+//         cookingTime.innerText = ""
+//       }
+//     })
+//   })
+// }
+
+// selectedSorting()
 
 
 
 
 
 // Alternative and test functions not in use below
-
-
 // ------------------------------------------------------------
 // "Test 2" function (for learning) to link recipe object to website
 
