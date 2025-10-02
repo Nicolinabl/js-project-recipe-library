@@ -161,10 +161,21 @@ const recipes = [
   }
 ]
 
-//  function that creates cards for every recipe object in the array
+//  Create cards for every recipe object in the array
 const recipeSection = document.querySelector(".recipeSection")
 
 const displayedRecipes = (recipes) => {
+  recipeSection.innerHTML = ""
+
+  if (recipes.length === 0) {
+    recipeSection.innerHTML = `
+      <div class="emptyState">
+        <p>No recipes found. Try a different filter!</p>
+      </div>
+    `
+    return
+  }
+
   recipes.forEach(recipe => {
     recipeSection.innerHTML += `
     <article class="recipe">
@@ -193,10 +204,9 @@ const displayedRecipes = (recipes) => {
 
 displayedRecipes(recipes)
 
-// Function: show selected filters
+// Display selected filters (shorten these functions. IF possible, make into one?)
 const filterButton = document.querySelectorAll(".filterButton")
 
-// shorten these functions. IF possible, make into one?
 // Italian
 const italianFilterSelected = (recipe) => {
   return recipe.cuisine === "Italian"
@@ -215,12 +225,19 @@ const mexicanRecipesSelected = (recipe) => {
 }
 const mexicanRecipes = recipes.filter(mexicanRecipesSelected)
 
+// swedish (for testing no matches)
+const swedishRecipesSelected = (recipe) => {
+  return recipe.cuisine === "Swedish"
+}
+const swedishRecipes = recipes.filter(swedishRecipesSelected)
+
 const selectedFilter = () => {
   filterButton.forEach(button => {
     button.addEventListener("click", () => {
-      filterButton.forEach(btn => btn.classList.remove("active"))
-      button.classList.add("active")
-      // put back: button.classList.toggle("active"), when creating code that can select several filters?
+      // filterButton.forEach(btn => btn.classList.remove("active"))
+      // button.classList.add("active")
+      // Which one to use? Toggle or remove + add?
+      button.classList.toggle("active")
 
       if (button.id === "allFilters" && button.classList.contains("active")) {
         recipeSection.innerHTML = ""
@@ -234,6 +251,12 @@ const selectedFilter = () => {
       } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
         recipeSection.innerHTML = ""
         displayedRecipes(mexicanRecipes)
+      } else if (button.id === "randomFilter" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(randomRecipe())
+      } else if (button.id === "swedishFilter" && button.classList.contains("active")) {
+        recipeSection.innerHTML = ""
+        displayedRecipes(swedishRecipes)
       } else {
         recipeSection.innerHTML = ""
         displayedRecipes(recipes)
@@ -244,54 +267,33 @@ const selectedFilter = () => {
 
 selectedFilter()
 
-// Function: selected sorting options
+const randomRecipe = () => {
+  const recipe = recipes[Math.floor(Math.random() * recipes.length)]
+  return [recipe]
+}
+
+
+// Select sorting options
 const cookingTime = document.getElementById("cookingTime")
 const sortingButton = document.querySelectorAll(".sortButton")
-
 
 const selectedSorting = () => {
   sortingButton.forEach(button => {
     button.addEventListener("click", () => {
-      sortingButton.forEach(btn => btn.classList.remove("active"))
-      button.classList.add("active")
-      if (button.id === "sortAscending" && button.classList.contains("active")) {
-        cookingTime.innerText = ("Ascending it is")
-      } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
-        cookingTime.innerText = ""
-      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
-        cookingTime.innerText = "Descending it is"
-      } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
-        cookingTime.innerText = ""
+      // sortingButton.forEach(btn => btn.classList.remove("active"))
+      // button.classList.add("active")
+      button.classList.toggle("active")
+
+      if (button.id === "sortAscending") {
+        displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
+      } else if (button.id === "sortDescending") {
+        displayedRecipes([...recipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes))
       }
     })
   })
 }
 
 selectedSorting()
-
-// const cookingTime = document.getElementById("cookingTime")
-// const sortingButton = document.querySelectorAll(".sortButton")
-
-// const selectedSorting = () => {
-//   sortingButton.forEach(button => {
-//     button.addEventListener("click", () => {
-//       sortingButton.forEach(btn => btn.classList.remove("active"))
-//       button.classList.add("active")
-//       if (button.id === "sortAscending" && button.classList.contains("active")) {
-//         cookingTime.innerText = ("Ascending it is")
-//       } else if (button.id === "sortAscending" && !button.classList.contains("active")) {
-//         cookingTime.innerText = ""
-//       } else if (button.id === "sortDescending" && button.classList.contains("active")) {
-//         cookingTime.innerText = "Descending it is"
-//       } else if (button.id === "sortDescending" && !button.classList.contains("active")) {
-//         cookingTime.innerText = ""
-//       }
-//     })
-//   })
-// }
-
-// selectedSorting()
-
 
 
 
