@@ -25,9 +25,41 @@
       id="cuisineSection"
       class="cuisineFilters"
     >
-      <h2>Filter on cuisine</h2>
-      <div class="filters">
-        <input
+      <label>
+        <h2>Diet options</h2>
+        <div class="filters">
+
+          <select
+            name="diet-filter"
+            id="dietFilterDropdown"
+          >
+            <option value="all">All</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten free</option>
+            <option value="dairy-free">Dairy free</option>
+          </select>
+      </label>
+
+      <!-- 
+      
+              <label>
+          <h2>Dietary requirements</h2>
+          <div class="filters">
+
+            <select
+              name="dietary-filter"
+              id="dietFilterDropdown"
+            >
+              <option value="all">All</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="gluten-free">Gluten free</option>
+              <option value="dairy-free">Dairy free</option>
+            </select>
+        </label>
+      
+      <input
           type="button"
           value="All"
           id="allFilters"
@@ -54,26 +86,34 @@
           id="mexicanFilter"
           class="filterButton"
         >
-
-        <input
-          type="button"
-          value="Random"
-          id="randomFilter"
-          class="filterButton"
-        >
-
         <input
           type="button"
           value="swedish"
           id="swedishFilter"
           class="filterButton"
-        >
+        > -->
     </section>
 
     <!---SORTING OPTIONS-->
     <section class="sortTime">
 
-      <h2>Sort on time</h2>
+      <!-- <label>
+        <h2>Sorting options</h2>
+        <div class="filters">
+
+          <select
+            name="diet-filter"
+            id="dietFilterDropdown"
+          >
+            <option value="">All</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten free</option>
+            <option value="dairy-free">Dairy free</option>
+          </select>
+      </label> -->
+
+      <h2>Sort on cooking time</h2>
       <div class="sortings">
         <button
           id="sortAscending"
@@ -85,7 +125,23 @@
         >Descending</button>
       </div>
     </section>
+
+
+
+
+
+    <section class="random-recipe">
+      <h2>Struggling to decide?</h2>
+      <input
+        type="button"
+        value="Random recipe"
+        id="randomButton"
+        class="random-button"
+      >
+    </section>
   </section>
+
+
 
   <!--RECIPE CARDS-->
   <main class="recipeSection">
@@ -184,7 +240,10 @@
     </article> -->
   </main>
 
-  <script src="script.js"></script>
+  <script
+    type="module"
+    src="script.js"
+  ></script>
 </body>
 
 </html>

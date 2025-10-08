@@ -1,200 +1,51 @@
 
-const recipes = [
-  {
-    id: 1,
-    title: "Vegan Lentil Soup",
-    image: "./chicken.webp",
-    readyInMinutes: 30,
-    servings: 4,
-    sourceUrl: "https://example.com/vegan-lentil-soup",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "red lentils",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "cumin",
-      "paprika",
-      "vegetable broth",
-      "olive oil",
-      "salt"
-    ],
-    pricePerServing: 2.5,
-    popularity: 85
-  },
-  {
-    id: 2,
-    title: "Vegetarian Pesto Pasta",
-    image: "./chicken.webp",
-    readyInMinutes: 25,
-    servings: 2,
-    sourceUrl: "https://example.com/vegetarian-pesto-pasta",
-    diets: ["vegetarian"],
-    cuisine: "Italian",
-    ingredients: [
-      "pasta",
-      "basil",
-      "parmesan cheese",
-      "garlic",
-      "pine nuts",
-      "olive oil",
-      "salt",
-      "black pepper"
-    ],
-    pricePerServing: 3.0,
-    popularity: 92
-  },
-  {
-    id: 3,
-    title: "Gluten-Free Chicken Stir-Fry",
-    image: "./chicken.webp",
-    readyInMinutes: 20,
-    servings: 3,
-    sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
-    diets: ["gluten-free"],
-    cuisine: "Asian",
-    ingredients: [
-      "chicken breast",
-      "broccoli",
-      "bell pepper",
-      "carrot",
-      "soy sauce (gluten-free)",
-      "ginger",
-      "garlic",
-      "sesame oil",
-      "cornstarch",
-      "green onion",
-      "sesame seeds",
-      "rice"
-    ],
-    pricePerServing: 4.0,
-    popularity: 78
-  },
-  {
-    id: 4,
-    title: "Dairy-Free Tacos",
-    image: "./chicken.webp",
-    readyInMinutes: 15,
-    servings: 2,
-    sourceUrl: "https://example.com/dairy-free-tacos",
-    diets: ["dairy-free"],
-    cuisine: "Mexican",
-    ingredients: [
-      "corn tortillas",
-      "ground beef",
-      "taco seasoning",
-      "lettuce",
-      "tomato",
-      "avocado"
-    ],
-    pricePerServing: 2.8,
-    popularity: 88
-  },
-  {
-    id: 5,
-    title: "Middle Eastern Hummus",
-    image: "./chicken.webp",
-    readyInMinutes: 10,
-    servings: 4,
-    sourceUrl: "https://example.com/middle-eastern-hummus",
-    diets: ["vegan", "gluten-free"],
-    cuisine: "Middle Eastern",
-    ingredients: [
-      "chickpeas",
-      "tahini",
-      "garlic",
-      "lemon juice",
-      "olive oil"
-    ],
-    pricePerServing: 1.5,
-    popularity: 95
-  },
-  {
-    id: 6,
-    title: "Quick Avocado Toast",
-    image: "./chicken.webp",
-    readyInMinutes: 5,
-    servings: 1,
-    sourceUrl: "https://example.com/quick-avocado-toast",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "bread",
-      "avocado",
-      "lemon juice",
-      "salt"
-    ],
-    pricePerServing: 2.0,
-    popularity: 90
-  },
-  {
-    id: 7,
-    title: "Beef Stew",
-    image: "./chicken.webp",
-    readyInMinutes: 90,
-    servings: 5,
-    sourceUrl: "https://example.com/beef-stew",
-    diets: [],
-    cuisine: "European",
-    ingredients: [
-      "beef chunks",
-      "potatoes",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "beef broth",
-      "red wine",
-      "bay leaves",
-      "thyme",
-      "salt",
-      "black pepper",
-      "butter",
-      "flour",
-      "celery",
-      "mushrooms"
-    ],
-    pricePerServing: 5.5,
-    popularity: 80
-  }
-]
 
-//  Create cards for every recipe object in the array
+const dietFilterDropdown = document.getElementById("dietFilterDropdown")
 const recipeSection = document.querySelector(".recipeSection")
 
+
+const API_KEY = "9db39a66159f43d287c05363e2271c81"
+const URL = `https://api.spoonacular.com/recipes/random?number=20&apiKey=${API_KEY}`
+const URL2 = `https://api.spoonacular.com/recipes/complexSearch?number=20&sort=random&addRecipeInformation=true&includeIngredients&apiKey=${API_KEY}` /* Used the complexSearch endpoint with addRecipeInformation=true to obtain cuisine details in url2 */
+
+
+// // import backup data from separate file:
+import { backupData } from './backupData.js'
+
+// ---------------------------------------------------------- 
+// |||||||||||||||| Show all recipes on page ||||||||||||||||
+// --------------------------------------------------------
 const displayedRecipes = (recipes) => {
   recipeSection.innerHTML = ""
 
   if (recipes.length === 0) {
     recipeSection.innerHTML = `
-      <div class="emptyState">
-        <p>No recipes found. Try a different filter!</p>
+  <div class="emptyState" >
+    <p>Oops no recipes found matching this filter. Try a different one!</p>
       </div>
-    `
+  `
     return
   }
 
   recipes.forEach(recipe => {
     recipeSection.innerHTML += `
-    <article class="recipe">
+      <article class="recipe">
       <div class="topImageContainer">
-        <img class="topImage" src="images/food.jpg" alt="photo of food">
+        <img class="topImage" src="${recipe.image}" alt="photo of food">
         <div class="recipeHeadingSection">
           <h2 class="recipeHeading">${recipe.title}</h2>
         </div>
       </div>
       <div class="generalInfo">
         <ul>
-          <li class="cuisine"><span>Cuisine:</span> ${recipe.cuisine}</li>
-          <li class="readyIn"><span>Time:</span> ${recipe.readyInMinutes}</li>
+          <li class="cuisine"><span>Cuisine:</span> ${recipe.cuisines?.[0] || "No cuisine listed"}</li>
+          <li class="readyIn"><span>Time:</span> ${recipe.readyInMinutes} min</li>
         </ul>
       </div>
       <div class="ingredients">
         <h3>Ingredients</h3>
         <ul>
-          ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
+          ${recipe.extendedIngredients?.map(ingredient => `<li> ${ingredient.original} </li>`).join("") || "<li>No ingredients available</li>"}
         </ul>
       </div>
     </article>
@@ -202,78 +53,53 @@ const displayedRecipes = (recipes) => {
   })
 }
 
-displayedRecipes(recipes)
+// -------------------------------------------------------- 
+// |||||||||||||||| Get recipes from API |||||||||||||||||
+// --------------------------------------------------------
 
-// Display selected filters (shorten these functions. IF possible, make into one?)
-const filterButton = document.querySelectorAll(".filterButton")
+let recipes = [] /* Läs på om detta */
 
-// Italian
-const italianFilterSelected = (recipe) => {
-  return recipe.cuisine === "Italian"
+const getRecipes = async () => {
+  // const response = await fetch(URL2)
+  // const data = await response.json()
+  const data = backupData
+  console.log(data.results)
+  recipes = data.results
+  displayedRecipes(recipes)
 }
-const italianRecipes = recipes.filter(italianFilterSelected)
 
-// Asian
-const asianRecipesSelected = (recipe) => {
-  return recipe.cuisine === "Asian"
-}
-const asianRecipes = recipes.filter(asianRecipesSelected)
+getRecipes()
 
-// mexican
-const mexicanRecipesSelected = (recipe) => {
-  return recipe.cuisine === "Mexican"
-}
-const mexicanRecipes = recipes.filter(mexicanRecipesSelected)
-
-// swedish (for testing no matches)
-const swedishRecipesSelected = (recipe) => {
-  return recipe.cuisine === "Swedish"
-}
-const swedishRecipes = recipes.filter(swedishRecipesSelected)
-
+// -------------------------------------------------------- 
+// |||||||||||||||| Show filtered recipes on page |||||||||||||||||
+// --------------------------------------------------------
 const selectedFilter = () => {
-  filterButton.forEach(button => {
-    button.addEventListener("click", () => {
-      // filterButton.forEach(btn => btn.classList.remove("active"))
-      // button.classList.add("active")
-      // Which one to use? Toggle or remove + add?
-      button.classList.toggle("active")
+  const dietFilter = dietFilterDropdown.value
 
-      if (button.id === "allFilters" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(recipes)
-      } else if (button.id === "italianFilter" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(italianRecipes)
-      } else if (button.id === "asianFilter" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(asianRecipes)
-      } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(mexicanRecipes)
-      } else if (button.id === "randomFilter" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(randomRecipe())
-      } else if (button.id === "swedishFilter" && button.classList.contains("active")) {
-        recipeSection.innerHTML = ""
-        displayedRecipes(swedishRecipes)
-      } else {
-        recipeSection.innerHTML = ""
-        displayedRecipes(recipes)
-      }
-    })
-  })
+  if (dietFilter === "all") {
+    displayedRecipes(recipes)
+  } else {
+    const chosenFilter = recipes.filter(recipe => recipe.diets?.map(diet => diet.toLowerCase()).includes(dietFilter)
+    )
+    displayedRecipes(chosenFilter)
+  }
 }
 
-selectedFilter()
+dietFilterDropdown.addEventListener("change", selectedFilter)
 
-const randomRecipe = () => {
-  const recipe = recipes[Math.floor(Math.random() * recipes.length)]
-  return [recipe]
+
+const randomButton = document.getElementById("randomButton")
+
+const getRandomRecipe = () => {
+  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
+  displayedRecipes([randomRecipe])
 }
 
+randomButton.addEventListener("click", getRandomRecipe)
 
-// Select sorting options
+// -------------------------------------------------------- 
+// |||||||||||||||| sort recipes on page |||||||||||||||||
+// --------------------------------------------------------
 const cookingTime = document.getElementById("cookingTime")
 const sortingButton = document.querySelectorAll(".sortButton")
 
@@ -284,10 +110,13 @@ const selectedSorting = () => {
       // button.classList.add("active")
       button.classList.toggle("active")
 
-      if (button.id === "sortAscending") {
+      if (button.id === "sortAscending" && button.classList.contains("active")) {
         displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
-      } else if (button.id === "sortDescending") {
+      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
         displayedRecipes([...recipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes))
+      } else {
+        recipeSection.innerHTML = ""
+        displayedRecipes(recipes)
       }
     })
   })
@@ -414,3 +243,72 @@ selectedSorting()
 // const recipeHeadingSection = document.querySelectorAll(".recipeHeadingSection")
 // const recipeTitle = document.getElementById("recipeTitle")
 // const recipeHeading = document.querySelectorAll(".recipeHeading")
+
+// --------------------------------------------------------------
+// ----------MY OLD CODE before shortening------------------------
+// --------------------------------------------------------------
+
+// const filterButton = document.querySelectorAll(".filterButton")
+
+// // Italian
+// const italianFilterSelected = (recipe) => {
+//   return recipe.cuisine === "Italian"
+// }
+// const italianRecipes = recipes.filter(italianFilterSelected)
+
+// // Asian
+// const asianRecipesSelected = (recipe) => {
+//   return recipe.cuisine === "Asian"
+// }
+// const asianRecipes = recipes.filter(asianRecipesSelected)
+
+// // mexican
+// const mexicanRecipesSelected = (recipe) => {
+//   return recipe.cuisine === "Mexican"
+// }
+// const mexicanRecipes = recipes.filter(mexicanRecipesSelected)
+
+// // swedish (for testing no matches)
+// const swedishRecipesSelected = (recipe) => {
+//   return recipe.cuisine === "Swedish"
+// }
+// const swedishRecipes = recipes.filter(swedishRecipesSelected)
+
+// const selectedFilter = () => {
+//   filterButton.forEach(button => {
+//     button.addEventListener("click", () => {
+//       // filterButton.forEach(btn => btn.classList.remove("active"))
+//       // button.classList.add("active")
+//       // Which one to use? Toggle or remove + add?
+//       button.classList.toggle("active")
+
+//       if (button.id === "allFilters" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(recipes)
+//       } else if (button.id === "italianFilter" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(italianRecipes)
+//       } else if (button.id === "asianFilter" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(asianRecipes)
+//       } else if (button.id === "mexicanFilter" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(mexicanRecipes)
+//       } else if (button.id === "randomFilter" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(randomRecipe())
+//       } else if (button.id === "swedishFilter" && button.classList.contains("active")) {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(swedishRecipes)
+//       } else {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(recipes)
+//       }
+//     })
+//   })
+// }
+
+// selectedFilter()
+// --------------------------------------------------------------
+// -----------------------MY OLD CODE----------------------------
+// --------------------------------------------------------------
