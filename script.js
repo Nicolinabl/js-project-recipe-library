@@ -1,29 +1,24 @@
 
-
-const dietFilterDropdown = document.getElementById("dietFilterDropdown")
-const recipeSection = document.querySelector(".recipeSection")
-
-
 const API_KEY = "9db39a66159f43d287c05363e2271c81"
 const URL = `https://api.spoonacular.com/recipes/random?number=20&apiKey=${API_KEY}`
-const URL2 = `https://api.spoonacular.com/recipes/complexSearch?number=20&sort=random&addRecipeInformation=true&includeIngredients&apiKey=${API_KEY}` /* Used the complexSearch endpoint with addRecipeInformation=true to obtain cuisine details in url2 */
+const URL2 = `https://api.spoonacular.com/recipes/complexSearch?number=20&sort=random&addRecipeInformation=true&apiKey=${API_KEY}` /* Used the complexSearch endpoint with addRecipeInformation=true to obtain cuisine details in url2 */
 
-
-// // import backup data from separate file:
-import { backupData } from './backupData.js'
 
 // ---------------------------------------------------------- 
 // |||||||||||||||| Show all recipes on page ||||||||||||||||
 // --------------------------------------------------------
+const recipeSection = document.querySelector(".recipeSection")
+
 const displayedRecipes = (recipes) => {
   recipeSection.innerHTML = ""
 
   if (recipes.length === 0) {
-    recipeSection.innerHTML = `
-  <div class="emptyState" >
-    <p>Oops no recipes found matching this filter. Try a different one!</p>
-      </div>
-  `
+    alert("Oops no recipes found matching this filter.Try a different one!")
+    //   recipeSection.innerHTML = `
+    //   <div class="no-matches">
+    //     <p>Oops no recipes found matching this filter. Try a different one!</p>
+    //   </div>
+    // `
     return
   }
 
@@ -40,6 +35,7 @@ const displayedRecipes = (recipes) => {
         <ul>
           <li class="cuisine"><span>Cuisine:</span> ${recipe.cuisines?.[0] || "No cuisine listed"}</li>
           <li class="readyIn"><span>Time:</span> ${recipe.readyInMinutes} min</li>
+          <li class="readyIn"><span>Health score:</span> ${recipe.healthScore}</li>
         </ul>
       </div>
       <div class="ingredients">
@@ -60,39 +56,95 @@ const displayedRecipes = (recipes) => {
 let recipes = [] /* Läs på om detta */
 
 const getRecipes = async () => {
-  // const response = await fetch(URL2)
-  // const data = await response.json()
+  try {
+    const response = await fetch(URL)
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    recipes = data.recipes
+    console.log("Recipes fetched from API", data.recipes)
+    displayedRecipes(recipes)
+
+    return true
+  } catch (error) {
+    console.error("Failing to fetch API:", error)
+    return false
+  }
+}
+
+// import backup data from separate file if API limit is reached
+import { backupData } from './backupData.js'
+
+const getLocalRecipes = async (backupData) => {
   const data = backupData
-  console.log(data.results)
-  recipes = data.results
+  recipes = data.recipes
+  console.log("Showing locally stored recipes", data.recipes)
   displayedRecipes(recipes)
 }
 
-getRecipes()
+const apiOrLocal = async () => {
+  const APIWorks = await getRecipes() //Tries to run function getRecipes first (from API)
+
+  if (!APIWorks) {
+    alert("The API credit limit has been reached... But don't worry, showing locally stored recipes instead.")
+    getLocalRecipes(backupData)
+  } // if getRecipes function does not work (api has reached a limit), run getLocalRecipes instead.
+}
+
+apiOrLocal()
 
 // -------------------------------------------------------- 
 // |||||||||||||||| Show filtered recipes on page |||||||||||||||||
 // --------------------------------------------------------
-const selectedFilter = () => {
-  const dietFilter = dietFilterDropdown.value
+const dietFilterDropdown = document.getElementById("dietFilterDropdown")
+
+const selectedDiet = () => {
+  const dietFilter = dietFilterDropdown.value.toLowerCase()
 
   if (dietFilter === "all") {
     displayedRecipes(recipes)
   } else {
-    const chosenFilter = recipes.filter(recipe => recipe.diets?.map(diet => diet.toLowerCase()).includes(dietFilter)
+    const chosenDiet = recipes.filter(recipe => recipe.diets?.map(diet => diet.toLowerCase()).includes(dietFilter)
     )
-    displayedRecipes(chosenFilter)
+    displayedRecipes(chosenDiet)
   }
 }
 
-dietFilterDropdown.addEventListener("change", selectedFilter)
+dietFilterDropdown.addEventListener("change", selectedDiet)
 
+const dishFilterDropdown = document.getElementById("dishFilterDropdown")
 
+const selectedDish = () => {
+  const dishFilter = dishFilterDropdown.value.toLowerCase()
+
+  if (dishFilter === "all") {
+    displayedRecipes(recipes)
+  } else {
+    const chosenDish = recipes.filter(recipe => recipe.dishTypes?.map(dish => dish.toLowerCase()).includes(dishFilter))
+    displayedRecipes(chosenDish)
+  }
+}
+
+dishFilterDropdown.addEventListener("change", selectedDish)
+
+// -------------------------------------------------------- 
+// |||||||||||||||| Get random recipe |||||||||||||||||
+// --------------------------------------------------------
 const randomButton = document.getElementById("randomButton")
 
 const getRandomRecipe = () => {
-  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
-  displayedRecipes([randomRecipe])
+  randomButton.classList.toggle("active")
+  if (randomButton.classList.contains("active")) {
+    const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
+    displayedRecipes([randomRecipe])
+    randomButton.value = "Back to all recipes"
+  } else {
+    displayedRecipes(recipes)
+    randomButton.value = "Random recipe"
+  }
+
 }
 
 randomButton.addEventListener("click", getRandomRecipe)
@@ -100,8 +152,10 @@ randomButton.addEventListener("click", getRandomRecipe)
 // -------------------------------------------------------- 
 // |||||||||||||||| sort recipes on page |||||||||||||||||
 // --------------------------------------------------------
-const cookingTime = document.getElementById("cookingTime")
+// const cookingTime = document.getElementById("cookingTime")
 const sortingButton = document.querySelectorAll(".sortButton")
+const fastMeals = document.getElementById("fastMeals")
+const popularMeals = document.getElementById("popularMeals")
 
 const selectedSorting = () => {
   sortingButton.forEach(button => {
@@ -110,10 +164,12 @@ const selectedSorting = () => {
       // button.classList.add("active")
       button.classList.toggle("active")
 
-      if (button.id === "sortAscending" && button.classList.contains("active")) {
+      if (button.id === "fastMeals" && button.classList.contains("active")) {
         displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
-      } else if (button.id === "sortDescending" && button.classList.contains("active")) {
-        displayedRecipes([...recipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes))
+      } else if (button.id === "popularMeals" && button.classList.contains("active")) {
+        displayedRecipes([...recipes].sort((a, b) => b.
+          healthScore - a.
+            healthScore))
       } else {
         recipeSection.innerHTML = ""
         displayedRecipes(recipes)
@@ -123,6 +179,27 @@ const selectedSorting = () => {
 }
 
 selectedSorting()
+
+// const selectedSorting = () => {
+//   sortingButton.forEach(button => {
+//     button.addEventListener("click", () => {
+//       // sortingButton.forEach(btn => btn.classList.remove("active"))
+//       // button.classList.add("active")
+//       button.classList.toggle("active")
+
+//       if (button.id === "sortAscending" && button.classList.contains("active")) {
+//         displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
+//       } else if (button.id === "sortDescending" && button.classList.contains("active")) {
+//         displayedRecipes([...recipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes))
+//       } else {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(recipes)
+//       }
+//     })
+//   })
+// }
+
+// selectedSorting()
 
 
 

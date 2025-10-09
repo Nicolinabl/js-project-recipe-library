@@ -22,76 +22,43 @@
   <section class="filters-sorting">
 
     <section
-      id="cuisineSection"
-      class="cuisineFilters"
+      id="filterSection"
+      class="filter-section"
     >
+      <!-- change this section name -->
       <label>
-        <h2>Diet options</h2>
-        <div class="filters">
+        <h2>Diet</h2>
+        <!-- <div class="filters"> -->
 
-          <select
-            name="diet-filter"
-            id="dietFilterDropdown"
-          >
-            <option value="all">All</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="vegan">Vegan</option>
-            <option value="gluten-free">Gluten free</option>
-            <option value="dairy-free">Dairy free</option>
-          </select>
+        <select
+          name="diet-filter"
+          id="dietFilterDropdown"
+        >
+          <option value="all">All</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="gluten free">Gluten free</option>
+          <option value="dairy free">Dairy free</option>
+        </select>
       </label>
 
-      <!-- 
-      
-              <label>
-          <h2>Dietary requirements</h2>
-          <div class="filters">
+      <label>
+        <h2>Dish type</h2>
+        <!-- <div class="filters"> -->
 
-            <select
-              name="dietary-filter"
-              id="dietFilterDropdown"
-            >
-              <option value="all">All</option>
-              <option value="vegetarian">Vegetarian</option>
-              <option value="vegan">Vegan</option>
-              <option value="gluten-free">Gluten free</option>
-              <option value="dairy-free">Dairy free</option>
-            </select>
-        </label>
-      
-      <input
-          type="button"
-          value="All"
-          id="allFilters"
-          class="filterButton"
+        <select
+          name="dish-filter"
+          id="dishFilterDropdown"
         >
+          <option value="all">All</option>
+          <option value="starter">Starter</option>
+          <option value="side dish">Side dish</option>
+          <option value="main course">Main course</option>
+          <option value="dessert">Dessert</option>
 
-        <input
-          type="button"
-          value="Italian"
-          id="italianFilter"
-          class="filterButton"
-        >
+        </select>
+      </label>
 
-        <input
-          type="button"
-          value="Asian"
-          id="asianFilter"
-          class="filterButton"
-        >
-
-        <input
-          type="button"
-          value="Mexican"
-          id="mexicanFilter"
-          class="filterButton"
-        >
-        <input
-          type="button"
-          value="swedish"
-          id="swedishFilter"
-          class="filterButton"
-        > -->
     </section>
 
     <!---SORTING OPTIONS-->
@@ -113,22 +80,18 @@
           </select>
       </label> -->
 
-      <h2>Sort on cooking time</h2>
+      <h2>Sorting options</h2>
       <div class="sortings">
         <button
-          id="sortAscending"
+          id="fastMeals"
           class="sortButton"
-        >Ascending</button>
+        >Fast meals</button>
         <button
-          id="sortDescending"
+          id="popularMeals"
           class="sortButton"
-        >Descending</button>
+        >Healthy meals</button>
       </div>
     </section>
-
-
-
-
 
     <section class="random-recipe">
       <h2>Struggling to decide?</h2>
@@ -141,103 +104,8 @@
     </section>
   </section>
 
-
-
   <!--RECIPE CARDS-->
   <main class="recipeSection">
-
-
-
-    <!-- currently not in use. Placeholder for js function "test 2"
-    <article
-      id="recipeContainer"
-      class="recipe"
-    > 
-    </article>-->
-
-    <!-- <article
-      id="recipeContainer"
-      class="recipe"
-    >
-      <div
-        id="recipeImageContainer"
-        class="topImageContainer"
-      >
-        <img
-          id="recipeImage"
-          class="topImage"
-          src="images/food.jpg"
-          alt="photo of food"
-        >
-        <div
-          id="recipeHeadingContainer"
-          class="recipeHeadingSection"
-        >
-          <h2
-            id="recipeTitle"
-            class="recipeHeading"
-          >Test</h2>
-        </div>
-      </div>
-      <div class="generalInfo">
-        <ul>
-          <li class="cuisine"><b>Cuisine: </b>Italian</li>
-          <li class="readyIn"><b>Time: </b>40 minutes</li>
-        </ul>
-      </div>
-      <div class="ingredients">
-        <h3>Ingredients</h3>
-        <ul>
-          <li>2 bunches scallions</li>
-          <li>8 tbs butter</li>
-          <li>2 oz fish filets</li>
-        </ul>
-      </div>
-    </article> -->
-
-    <!-- <article class="recipe two">
-      <div class="topImage">
-        <img
-          src="images/food.jpg"
-          alt="photo of food"
-        >
-        <div class="recipeHeading">
-          <h2>Baked Chicken</h2>
-        </div>
-      </div>
-      <div class="generalInfo">
-        <p><b>Cuisine: </b>Italian</p>
-        <p><b>Time: </b>40 minutes</p>
-      </div>
-      <div class="ingredients">
-        <h3>Ingredients</h3>
-        <p>6 boneless chicken</p>
-        <p>1/2 tbs coarse salt</p>
-        <p>1/4 tbs seasoning</p>
-        <p>1/4 freshly ground black pepper</p>
-      </div>
-    </article>
-
-    <article class="recipe three">
-      <div class="topImage">
-        <img
-          src="images/food.jpg"
-          alt="foto of food"
-        >
-        <div class="recipeHeading">
-          <h2>Deep fried Fish bones</h2>
-        </div>
-      </div>
-      <div class="generalInfo">
-        <p><b>Cuisine: </b>Italian</p>
-        <p><b>Time: </b>40 minutes</p>
-      </div>
-      <div class="ingredients">
-        <h3>Ingredients</h3>
-        <p>8 small fish</p>
-        <p>4 cups vegetable oils</p>
-      </div>
-    </article> -->
   </main>
 
   <script
