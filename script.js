@@ -180,6 +180,31 @@ const selectedSorting = () => {
 
 selectedSorting()
 
+// -------------------------------------------------------- 
+// |||||||||||||||| Search bar |||||||||||||||||
+// --------------------------------------------------------
+const searchInput = document.querySelector("[data-search]")
+
+searchInput.addEventListener("input", e => {
+  const value = e.target.value.toLowerCase()
+
+  const filteredRecipes = recipes.filter(recipe => {
+    const titleMatch = recipe.title.toLowerCase().includes(value)
+
+    return titleMatch
+  })
+
+  displayedRecipes(filteredRecipes)
+
+  // recipes.forEach(recipe => {
+  //   const isVisible = recipe.title.includes(value) || recipe.extendedIngredients.includes(value)
+  //   recipe.element.classList.toggle("hide", !isVisible)
+  // })
+})
+
+
+
+
 // const selectedSorting = () => {
 //   sortingButton.forEach(button => {
 //     button.addEventListener("click", () => {

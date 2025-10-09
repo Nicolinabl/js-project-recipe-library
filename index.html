@@ -28,8 +28,6 @@
       <!-- change this section name -->
       <label>
         <h2>Diet</h2>
-        <!-- <div class="filters"> -->
-
         <select
           name="diet-filter"
           id="dietFilterDropdown"
@@ -44,8 +42,6 @@
 
       <label>
         <h2>Dish type</h2>
-        <!-- <div class="filters"> -->
-
         <select
           name="dish-filter"
           id="dishFilterDropdown"
@@ -62,37 +58,43 @@
     </section>
 
     <!---SORTING OPTIONS-->
+
+    <!------------------
+     <h2>Sorting options</h2>
+    <select
+      name="cooking-time"
+      id="cookingTimeDropdown"
+    >
+      <option value="fastMeals">Fast meals</option>
+      <option value="slowMeals">Slow meals</option>
+    </select>
+
+    <select
+      name="health-score"
+      id="healthScoreDropdown"
+    >
+      <option value="healthyMeals">Healthy meals</option>
+      <option value="unHealthyMeals">Unhealthy meals</option>
+    </select> 
+    ------------------>
+
+
     <section class="sortTime">
-
-      <!-- <label>
-        <h2>Sorting options</h2>
-        <div class="filters">
-
-          <select
-            name="diet-filter"
-            id="dietFilterDropdown"
-          >
-            <option value="">All</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="vegan">Vegan</option>
-            <option value="gluten-free">Gluten free</option>
-            <option value="dairy-free">Dairy free</option>
-          </select>
-      </label> -->
-
       <h2>Sorting options</h2>
       <div class="sortings">
         <button
           id="fastMeals"
           class="sortButton"
-        >Fast meals</button>
+        >Quick</button>
         <button
           id="popularMeals"
           class="sortButton"
-        >Healthy meals</button>
+        >Healthy</button>
       </div>
     </section>
 
+
+    <!-- RANDOM RECIPE -->
     <section class="random-recipe">
       <h2>Struggling to decide?</h2>
       <input
@@ -102,6 +104,17 @@
         class="random-button"
       >
     </section>
+  </section>
+
+  <!----SEARCH BAR-->
+  <section class="search-wrapper">
+    <input
+      type="search"
+      id="search"
+      class="search-bar"
+      placeholder="Quick search..."
+      data-search
+    />
   </section>
 
   <!--RECIPE CARDS-->
