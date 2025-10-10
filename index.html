@@ -15,17 +15,14 @@
 </head>
 
 <body>
-  <!---HEADING-->
   <h1 class="mainHeading">Recipe Library</h1>
 
-  <!---FILTERS-->
   <section class="filters-sorting">
 
     <section
       id="filterSection"
       class="filter-section"
     >
-      <!-- change this section name -->
       <label>
         <h2>Diet</h2>
         <select
@@ -51,65 +48,45 @@
           <option value="side dish">Side dish</option>
           <option value="main course">Main course</option>
           <option value="dessert">Dessert</option>
+        </select>
+      </label>
+    </section>
 
+    <section class="sorting-section">
+      <label>
+        <h2>Cooking time</h2>
+        <select
+          name="cooking-time"
+          id="cookingTimeDropdown"
+          class="sorting-options"
+        >
+          <option
+            selected
+            value=""
+          >---</option>
+          <option value="fastMeals">Ascending</option>
+          <option value="slowMeals">Descending</option>
         </select>
       </label>
 
+      <label>
+        <h2>Health score</h2>
+        <select
+          name="health-score"
+          id="healthScoreDropdown"
+          class="sorting-options"
+        >
+          <option
+            selected
+            value=""
+          >---</option>
+          <option value="healthyMeals">Ascending</option>
+          <option value="unHealthyMeals">Descending</option>
+        </select>
+      </label>
     </section>
 
-    <!---SORTING OPTIONS-->
-
-    <label>
-      <h2>Cooking time</h2>
-      <select
-        name="cooking-time"
-        id="cookingTimeDropdown"
-        class="sorting-options"
-      >
-        <option
-          selected
-          value=""
-        >---</option>
-        <option value="fastMeals">Show quickest first</option>
-        <option value="slowMeals">Show slowest first</option>
-      </select>
-    </label>
-
-    <label>
-      <h2>Health score</h2>
-      <select
-        name="health-score"
-        id="healthScoreDropdown"
-        class="sorting-options"
-      >
-        <option
-          selected
-          value=""
-        >---</option>
-        <option value="healthyMeals">Show healthiest first</option>
-        <option value="unHealthyMeals">Show unhealthiest first</option>
-      </select>
-    </label>
-
-
-
-    <!-- <section class="sortTime">
-      <h2>Sorting options</h2>
-      <div class="sortings">
-        <button
-          id="fastMeals"
-          class="sortButton"
-        >Quick</button>
-        <button
-          id="popularMeals"
-          class="sortButton"
-        >Healthy</button>
-      </div>
-    </section> -->
-
-
-    <!-- RANDOM RECIPE -->
-    <section class="random-recipe">
+    <section class="random-section">
       <label>
         <h2>Struggling to decide?</h2>
         <input
@@ -122,8 +99,7 @@
     </section>
   </section>
 
-  <!----SEARCH BAR-->
-  <section class="search-wrapper">
+  <section class="search-section">
     <input
       type="search"
       id="search"
@@ -133,7 +109,6 @@
     />
   </section>
 
-  <!--RECIPE CARDS-->
   <main class="recipeSection">
   </main>
 
