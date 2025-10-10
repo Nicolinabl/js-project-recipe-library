@@ -13,12 +13,12 @@ const displayedRecipes = (recipes) => {
   recipeSection.innerHTML = ""
 
   if (recipes.length === 0) {
-    alert("Oops no recipes found matching this filter.Try a different one!")
-    //   recipeSection.innerHTML = `
-    //   <div class="no-matches">
-    //     <p>Oops no recipes found matching this filter. Try a different one!</p>
-    //   </div>
-    // `
+    // alert("Oops no recipes found matching this filter.Try a different one!")
+    recipeSection.innerHTML = `
+      <div class="no-matches">
+        <p>Oops no recipes found...<br> Try something else!</p>
+      </div>
+    `
     return
   }
 
@@ -156,29 +156,43 @@ randomButton.addEventListener("click", getRandomRecipe)
 const sortingButton = document.querySelectorAll(".sortButton")
 const fastMeals = document.getElementById("fastMeals")
 const popularMeals = document.getElementById("popularMeals")
+const cookingTimeDropdown = document.getElementById("cookingTimeDropdown")
+const healthScoreDropdown = document.getElementById("healthScoreDropdown")
 
-const selectedSorting = () => {
-  sortingButton.forEach(button => {
-    button.addEventListener("click", () => {
-      // sortingButton.forEach(btn => btn.classList.remove("active"))
-      // button.classList.add("active")
-      button.classList.toggle("active")
+const cookingTimeSorting = () => {
+  const chosenCookingTime = cookingTimeDropdown.value
+  if (chosenCookingTime === "fastMeals") {
+    displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
+  } else if (chosenCookingTime === "slowMeals") {
+    displayedRecipes([...recipes].sort((a, b) => b.readyInMinutes - a.readyInMinutes))
+  } else {
+    displayedRecipes(recipes)
+  }
 
-      if (button.id === "fastMeals" && button.classList.contains("active")) {
-        displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
-      } else if (button.id === "popularMeals" && button.classList.contains("active")) {
-        displayedRecipes([...recipes].sort((a, b) => b.
-          healthScore - a.
-            healthScore))
-      } else {
-        recipeSection.innerHTML = ""
-        displayedRecipes(recipes)
-      }
-    })
-  })
 }
 
-selectedSorting()
+// cookingTimeSorting()
+
+cookingTimeDropdown.addEventListener("change", cookingTimeSorting)
+
+const healthScoreSorting = () => {
+  const chosenHealthScore = healthScoreDropdown.value
+  if (chosenHealthScore === "healthyMeals") {
+    displayedRecipes([...recipes].sort((a, b) => b.healthScore - a.healthScore))
+  } else if (chosenHealthScore === "unHealthyMeals") {
+    displayedRecipes([...recipes].sort((a, b) => a.healthScore - b.healthScore))
+  } else {
+    displayedRecipes(recipes)
+  }
+
+}
+
+// healthScoreSorting()
+
+healthScoreDropdown.addEventListener("change", healthScoreSorting)
+
+
+
 
 // -------------------------------------------------------- 
 // |||||||||||||||| Search bar |||||||||||||||||
@@ -196,10 +210,6 @@ searchInput.addEventListener("input", e => {
 
   displayedRecipes(filteredRecipes)
 
-  // recipes.forEach(recipe => {
-  //   const isVisible = recipe.title.includes(value) || recipe.extendedIngredients.includes(value)
-  //   recipe.element.classList.toggle("hide", !isVisible)
-  // })
 })
 
 
@@ -414,3 +424,29 @@ searchInput.addEventListener("input", e => {
 // --------------------------------------------------------------
 // -----------------------MY OLD CODE----------------------------
 // --------------------------------------------------------------
+// const sortingButton = document.querySelectorAll(".sortButton")
+// const fastMeals = document.getElementById("fastMeals")
+// const popularMeals = document.getElementById("popularMeals")
+
+// const selectedSorting = () => {
+//   sortingButton.forEach(button => {
+//     button.addEventListener("click", () => {
+//       // sortingButton.forEach(btn => btn.classList.remove("active"))
+//       // button.classList.add("active")
+//       button.classList.toggle("active")
+
+//       if (button.id === "fastMeals" && button.classList.contains("active")) {
+//         displayedRecipes([...recipes].sort((a, b) => a.readyInMinutes - b.readyInMinutes))
+//       } else if (button.id === "popularMeals" && button.classList.contains("active")) {
+//         displayedRecipes([...recipes].sort((a, b) => b.
+//           healthScore - a.
+//             healthScore))
+//       } else {
+//         recipeSection.innerHTML = ""
+//         displayedRecipes(recipes)
+//       }
+//     })
+//   })
+// }
+
+// selectedSorting()

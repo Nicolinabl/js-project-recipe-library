@@ -41,7 +41,7 @@
       </label>
 
       <label>
-        <h2>Dish type</h2>
+        <h2>Dish</h2>
         <select
           name="dish-filter"
           id="dishFilterDropdown"
@@ -59,27 +59,41 @@
 
     <!---SORTING OPTIONS-->
 
-    <!------------------
-     <h2>Sorting options</h2>
-    <select
-      name="cooking-time"
-      id="cookingTimeDropdown"
-    >
-      <option value="fastMeals">Fast meals</option>
-      <option value="slowMeals">Slow meals</option>
-    </select>
+    <label>
+      <h2>Cooking time</h2>
+      <select
+        name="cooking-time"
+        id="cookingTimeDropdown"
+        class="sorting-options"
+      >
+        <option
+          selected
+          value=""
+        >---</option>
+        <option value="fastMeals">Show quickest first</option>
+        <option value="slowMeals">Show slowest first</option>
+      </select>
+    </label>
 
-    <select
-      name="health-score"
-      id="healthScoreDropdown"
-    >
-      <option value="healthyMeals">Healthy meals</option>
-      <option value="unHealthyMeals">Unhealthy meals</option>
-    </select> 
-    ------------------>
+    <label>
+      <h2>Health score</h2>
+      <select
+        name="health-score"
+        id="healthScoreDropdown"
+        class="sorting-options"
+      >
+        <option
+          selected
+          value=""
+        >---</option>
+        <option value="healthyMeals">Show healthiest first</option>
+        <option value="unHealthyMeals">Show unhealthiest first</option>
+      </select>
+    </label>
 
 
-    <section class="sortTime">
+
+    <!-- <section class="sortTime">
       <h2>Sorting options</h2>
       <div class="sortings">
         <button
@@ -91,18 +105,20 @@
           class="sortButton"
         >Healthy</button>
       </div>
-    </section>
+    </section> -->
 
 
     <!-- RANDOM RECIPE -->
     <section class="random-recipe">
-      <h2>Struggling to decide?</h2>
-      <input
-        type="button"
-        value="Random recipe"
-        id="randomButton"
-        class="random-button"
-      >
+      <label>
+        <h2>Struggling to decide?</h2>
+        <input
+          type="button"
+          value="Random recipe"
+          id="randomButton"
+          class="random-button"
+        >
+      </label>
     </section>
   </section>
 

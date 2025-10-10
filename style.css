@@ -24,36 +24,44 @@ body {
   margin-left: 64px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .filters-sorting {
-    /* flex-direction: column; */
+    gap: 24px;
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+/* @media (max-width: 1024px) {
+  .filters-sorting {
+    flex-direction: column;
     gap: 0;
     width: 90%;
   }
-}
+} */
 
 .filter-section {
   display: flex;
   gap: 10px;
 }
 
-@media (max-width: 736px) {
+/* @media (max-width: 736px) {
   .filter-section {
-    /* flex-direction: column; */
+    flex-direction: column;
   }
-}
+} */
 
-.filters {
+/* .filters {
   display: flex;
   gap: 10px;
-}
-
+} */
+/* 
 @media (max-width: 736px) {
   .filters {
     flex-direction: column;
     flex-wrap: wrap;
   }
-}
+} */
 
 select {
   border: none;
@@ -65,28 +73,11 @@ select {
   color: #0018A4;
   font-weight: 350;
   gap: 10px;
+  cursor: pointer;
 }
 
 select:hover {
   box-shadow: 0 0 0 2px #0018a4;
-  /* "fake" border. To prevent other elements shifting on the page when added*/
-}
-
-option {
-  border: none;
-  height: 40px;
-  border-radius: 50px;
-  padding: 8px 16px 8px 16px;
-  background-color: #ccffe2;
-  font-size: 18px;
-  color: #0018A4;
-  font-weight: 350;
-  gap: 10px;
-}
-
-option:hover {
-  box-shadow: 0 0 0 2px #0018a4;
-  /* "fake" border. To prevent other elements shifting on the page when added*/
 }
 
 .random-button {
@@ -94,12 +85,42 @@ option:hover {
   height: 40px;
   border-radius: 50px;
   padding: 8px 16px 8px 16px;
+  background-color: #fdd99e;
+  font-size: 18px;
+  color: #0018A4;
+  font-weight: 350;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* option {
+  appearance: none;
+  border: none;
+  height: 40px;
+  border-radius: 50px;
+  padding: 8px 16px 8px 16px;
   background-color: #ccffe2;
   font-size: 18px;
   color: #0018A4;
   font-weight: 350;
   gap: 10px;
-}
+} */
+
+/* option:hover {
+  box-shadow: 0 0 0 2px #0018a4;
+} */
+
+/* .random-button {
+  border: none;
+  height: 40px;
+  border-radius: 50px;
+  padding: 8px 16px 8px 16px;
+  background-color: #ccffe2;
+  font-size: 18px;
+  color: #0018A4;
+  font-weight: 350;
+  gap: 10px;
+} */
 
 .random-button:hover {
   box-shadow: 0 0 0 2px #0018a4;
@@ -110,19 +131,18 @@ option:hover {
   color: white;
 }
 
-.sortings {
+/* .sortings {
   display: flex;
   gap: 10px;
-}
+} */
 
-@media (max-width: 736px) {
+/* @media (max-width: 736px) {
   .sortings {
-    /* flex-direction: column; */
     flex-wrap: wrap;
   }
-}
+} */
 
-.sortButton {
+.sorting-options {
   height: 40px;
   border-radius: 50px;
   padding: 8px 16px;
@@ -134,14 +154,14 @@ option:hover {
   font-weight: 350;
 }
 
-.sortButton:hover {
+/* .sortButton:hover {
   box-shadow: 0 0 0 2px #0018a4;
 }
 
 .sortButton.active {
   background-color: #0018A4;
   color: white;
-}
+} */
 
 .search-wrapper {
   display: flex;
@@ -255,12 +275,27 @@ p {
   font-weight: 500;
 }
 
-.no-matches {
+/* .no-matches {
   display: flex;
   width: 100%;
   min-height: 60vh;
   justify-content: center;
   align-items: center;
+} */
+
+.no-matches {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  /* font-weight: 100; */
+  color: #0018A4;
+  padding: 20px;
+  margin-top: 60px;
+  grid-column: 1/5;
 }
 
 li {
